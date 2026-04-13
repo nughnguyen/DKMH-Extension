@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "GumballZ Registration",
+  "version": "1.0.0",
+  "description": "Premium Auto-Registration Extension with Stealth and Multi-Threading.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "scripting",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "background": {
+    "service_worker": "background/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "UIUX/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["prod/tasks/polling.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

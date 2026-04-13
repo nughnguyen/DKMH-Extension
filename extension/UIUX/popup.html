@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GumballZ Universal Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="glass-panel">
+        <header>
+            <h2>GumballZ Engine</h2>
+            <div class="status-indicator" id="engineStatus"><span class="dot red"></span> Standby</div>
+        </header>
+
+        <main>
+            <div class="input-group">
+                <label for="targetUrl">Link Đăng Ký (URL):</label>
+                <input type="text" id="targetUrl" placeholder="https://dkmh.eiu.edu.vn/..." />
+            </div>
+
+            <div class="input-group">
+                <label for="subjectCode">Mã Môn Học:</label>
+                <input type="text" id="subjectCode" placeholder="VD: ENG101, IT302..." />
+            </div>
+
+            <div class="engine-detection" id="detectionResult">
+                Chưa nhận diện trường...
+            </div>
+
+            <div class="actions">
+                <button id="btnStart" class="btn-primary">Bắt Đầu Đăng Ký</button>
+            </div>
+            
+            <div class="advanced-features">
+                <label><input type="checkbox" id="stealthMode" checked> Stealth Mode (Anti-WAF)</label>
+                <label><input type="checkbox" id="autoLogin" checked> Auto-Login / Session Keeper</label>
+            </div>
+        </main>
+
+        <footer>
+            <span>By NSN/NQH - EIU Student</span>
+            <a href="#" id="openPortal">Donate</a>
+        </footer>
+    </div>
+    <script src="popup.js" type="module"></script>
+</body>
+</html>
