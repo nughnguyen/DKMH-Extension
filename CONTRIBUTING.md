@@ -1,183 +1,128 @@
-# Huong dan dong gop cho GumballZ
+# Hướng dẫn đóng góp cho GumballZ
 
-Cam on ban da quan tam den viec dong gop cho GumballZ!
-Tung sinh vien o moi truong co the giup he thong ho tro them nhieu truong hon.
+Cảm ơn bạn đã quan tâm đến việc đóng góp mã nguồn cho hệ sinh thái **GumballZ**!
+Mội bạn sinh viên đều có thể tự tay lập trình module riêng biệt (gọi là **Engine**) để phá khóa và tương tác API đặt môn học trên Cổng đào tạo của trường đại học bạn đang theo học. Bằng cách gộp chung vào 1 nơi, Extension sẽ tự chuyển mình thành phiên bản mạnh mẽ đa trường trực tuyến.
 
 ---
 
-## Cach them Engine cho truong cua ban
+## Cách đưa Engine trường bạn vào hệ sinh thái GumballZ
 
-### 1. Fork repository
+### Bước 1: Fork Repository nhánh gốc
+
+Tiến hành Fork source trên Github, clone về máy và tạo nhánh (branch) mới:
 
 ```bash
-git fork https://github.com/nughnguyen/DKMH-Extension
-git checkout -b feature/ten-truong-engine
+git clone https://github.com/TÊN-GIẢ-CỦA-BẠN/DKMH-Extension.git
+git checkout -b feature/them-truong-uit-engine
 ```
 
-### 2. Tao file engine moi
+### Bước 2: Khởi tạo module Engine Javascript
 
-Tao file moi trong `extension/prod/implementation/`:
+Mọi đoạn Code vượt rào / Crawl data đều xử lý trong thư mục **Implementation**:
+- Tạo file mới tại đường dẫn: `extension/prod/implementation/`
+- Tên ví dụ: `uit_engine.js` hoặc `ueh_engine.js` (Hãy tham khảo format `eiu_engine.js` cũ).
 
-```
-ten_truong_engine.js
-```
+### Bước 3: Implement Cấu trúc Bắt buộc (The Core Interface)
 
-Vi du: `bku_engine.js`, `hust_engine.js`, `vnu_engine.js`
-
-### 3. Implement interface chuan
-
-Moi engine **bat buoc** phai export mot object theo interface sau:
+Thư viện nạp Engine chạy ẩn yêu cầu Export 1 Object Javascript chứa quy chuẩn nhất định. Hãy sao chép Template sau:
 
 ```javascript
-// extension/prod/implementation/ten_truong_engine.js
+// extension/prod/implementation/tentruong_engine.js
 
-const TenTruongEngine = {
-  // ===== THONG TIN TRUONG (BAT BUOC) =====
-  schoolName: "Ten day du cua truong",
-  shortName: "TEN",
+const TruongTuiEngine = {
+  // ===== 1. Khai báo thông tin hiển thị =====
+  schoolName: "Đại học Bách Khoa TP.HCM (HCMUT)",
+  shortName: "HCMUT",
 
-  // URL patterns de nhan dien truong
-  // Su dung regex hoac string
-  urlPatterns: ["tentruong.edu.vn", "dkmh.tentruong.edu.vn"],
+  // [Quan Trọng] Trình khớp Regex bắt đường link website 
+  // của trường đại học sẽ sử dụng hệ thống GumballZ này.
+  urlPatterns: ["tuyen-sinh.hcmut.edu.vn", "mybk.hcmut.edu.vn"],
 
-  // ===== SELECTORS (BAT BUOC) =====
-  // CSS selectors cho cac phan tu tren trang truong
+  // ===== 2. Định Nghĩa DOM Selectors =====
   selectors: {
-    usernameField: "#username", // O nhap ten dang nhap
-    passwordField: "#password", // O nhap mat khau
-    loginButton: "#btn-login", // Nut dang nhap
-    courseSearchInput: "#ma-mon", // O nhap ma mon hoc
-    registerButton: ".btn-register", // Nut dang ky
-    statusMessage: ".alert", // Khu vuc hien thi ket qua
+    usernameField: "#tai_khoan_bk", 
+    passwordField: "#mat_khau_bk",
+    loginButton: ".btn-login-bk",
+    courseSearchInput: "#nhap_ma_mon_hp",
+    registerButton: "#btn_dk_hoc_phan",
+    statusMessage: ".modal-alert-txt",
   },
 
-  // ===== METHODS (BAT BUOC) =====
+  // ===== 3. Logic Hoạt động Cơ sở =====
 
   /**
-   * Kiem tra xem trang hien tai co phai trang login khong
-   * @returns {boolean}
+   * Báo cho Bot biết đây có phải trang Log-In không?
    */
   isLoginPage() {
-    // Vi du:
-    return (
-      window.location.href.includes("/login") ||
-      !!document.querySelector(this.selectors.usernameField)
-    );
+    return window.location.href.includes("/login");
   },
 
   /**
-   * Thuc hien tu dong dang nhap
-   * @param {string} username - Ten dang nhap
-   * @param {string} password - Mat khau
-   * @returns {Promise<{success: boolean, message: string}>}
+   * Bơm Account - Password vô Cổng. (Hãy tạo human-delay để lách firewall tường lửa Cổng web).
    */
   async login(username, password) {
-    // Implement logic dang nhap cua truong o day
-    // Su dung humanLikeDelay() de tranh bi WAF phat hien
-    throw new Error("Chua implement login()");
+    throw new Error("Người đóng góp chưa lập trình hàm login");
   },
 
   /**
-   * Dang ky mot mon hoc
-   * @param {string} courseCode - Ma mon hoc
-   * @returns {Promise<{success: boolean, message: string}>}
+   * Truyền API Request hoặc dùng Web-Element để nhấn Click đăng ký môn.
    */
   async register(courseCode) {
-    // Implement logic dang ky mon hoc o day
-    throw new Error("Chua implement register()");
+    throw new Error("Người đóng góp chưa lập trình hàm register");
   },
 
   /**
-   * Kiem tra ket qua dang ky
-   * @returns {Promise<{registered: boolean, message: string}>}
+   * Đọc Pop-up text để biết đã Đạt thành công - Môn Đầy sĩ số - Hay Trùng thời khoá biểu.
    */
   async checkStatus() {
-    // Kiem tra trang thai dang ky hien tai
-    throw new Error("Chua implement checkStatus()");
+    throw new Error("Người đóng góp chưa lặp trình vòng lập xác nhận");
   },
 
   /**
-   * Gui heartbeat request de duy tri session
-   * @returns {Promise<void>}
+   * Băm nhẹ Request fetch "nhá hàng" để Hệ thống trường không tự thoát khỏi phiên do Afk quá lâu.
    */
   async sendHeartbeat() {
-    // Tuy chon: Fetch mot URL no-op de giu session
-    // Vi du: await fetch("/api/ping", { credentials: "include" });
+    // Vd: await fetch("api/giu-kone-session");
   },
 };
 
-// QUAN TRONG: Phai export dung ten bien
-// engine_controller.js se nap file nay va dung giao dien nay
+// Module export ra ngoài Engine Controller
 if (typeof module !== "undefined") {
-  module.exports = TenTruongEngine;
+  module.exports = TruongTuiEngine;
 }
 ```
 
-### 4. Dang ky engine vao controller
+### Bước 4: Khai Báo Sinh Nhai Với Trạm Cấu Hình (`engines-manifest.js`)
 
-Mo file `extension/prod/engine_controller.js` va them engine cua ban vao mang `ENGINES`:
+**ĐÂY LÀ ĐIỂM THAY ĐỔI LỚN NHẤT:** Bạn **không** cần phải chỉnh sửa file `engine_controller.js`. Hãy mở file Nguồn Nền Tảng (Single Source of Truth) tại thư mục Root.
+
+Mở file: `DKMH-Extension/engines-manifest.js`
+Thêm đối tượng thiết lập cho trường của bạn vào mảng `GUMBALLZ_ENGINES`:
 
 ```javascript
-// Trong engine_controller.js
-const ENGINE_REGISTRY = [
-  // ... cac engine khac ...
   {
-    patterns: ["tentruong.edu.vn"],
-    file: "ten_truong_engine.js",
-    name: "Ten Truong Dai Hoc",
+    shortName:  "UIT",
+    fullName:   "ĐH Công nghệ Thông tin (UIT - VNU-HCM)",
+    file:       "uit_engine.js", // Tên file đã đặt ở bước 2
+    status:     "beta",          // hoặc 'active'
+    statusLabel:"Beta",
+    patterns:   ["suwo.uit.edu.vn", "dangky.uit.edu.vn"]
   },
-];
 ```
 
-### 5. Viet tests (Khuyen khich)
+> [!WARNING]
+> Vì file này là Nguồn Trị Sự chung cho toàn dự án nên việc copy đè sang giao diện Web-Portal (`web-portal/engines-manifest.js`) là cực kỳ quan trọng để đảm bảo Landing Page biết có Engine trường mới gia nhập hệ sinh thái!
 
-Tao file test trong `extension/prod/implementation/tests/`:
+### Bước 5: Pull Request Gộp Giao Diện (Push PR)
 
-```
-ten_truong_engine.test.js
-```
+Mọi chức năng Push code lên Git của các bạn là sự lan tỏa thành công của hệ sinh thái đăng ký học tập Việt Nam!
+Vui lòng soạn Mô tả Pull Request (Description):
+- Tên trường mới:
+- API Check vượt Cổng WAF / Bot detection / Captcha.
+- Demo tính ổn định.
 
-### 6. Cap nhat README
-
-Them truong cua ban vao bang "Cac truong duoc ho tro" trong `README.md`.
+Liên hệ quản trị kho dữ liệu dự án trên [Pull Requests](https://github.com/nughnguyen/DKMH-Extension/pulls) hoặc liên lạc qua email: `hungnq.august.work@gmail.com`.
 
 ---
 
-## Quy tac chung
-
-- **Khong luu mat khau** trong source code
-- **Su dung `humanLikeDelay()`** cho tat ca cac action tu dong
-- **Xu ly loi day du**: network timeout, CAPTCHA, session expired
-- **Comment bang tieng Viet** la duoc khuyen khich
-- **Mo ta ro rang** trong Pull Request: ten truong, da test o dau, luu y gi
-
----
-
-## Mau Pull Request
-
-```
-## Them engine cho [Ten Truong]
-
-**URL truong**: https://dkmh.tentruong.edu.vn
-**Da test voi**: Chrome 120, Windows 11
-**Ky thuat dac biet**: [Neu co, vi du: bypass CAPTCHA loai X]
-
-### Checklist
-- [ ] Da implement day du 4 methods bat buoc
-- [ ] Da test tay ket qua
-- [ ] Da cap nhat README
-- [ ] Khong co hardcode credentials
-```
-
----
-
-## Lien he ho tro
-
-Gap kho khan? Lien he qua:
-
-- GitHub Issues: [nughnguyen/DKMH-Extension/issues](https://github.com/nughnguyen/DKMH-Extension/issues)
-- Email: hungnq.august.work@gmail.com
-
----
-
-_Cam on vi dong gop de GumballZ ngay cang tot hon!_
+_Cảm ơn bạn! GumballZ Registration System mạnh mẽ hơn là nhờ vào các Coder tâm huyết!_
