@@ -1,49 +1,214 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GumballZ Universal Engine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="popup.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GumballZ – Auto DKMH</title>
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <div class="glass-panel">
-        <header>
-            <h2>GumballZ Engine</h2>
-            <div class="status-indicator" id="engineStatus"><span class="dot red"></span> Standby</div>
-        </header>
 
-        <main>
-            <div class="input-group">
-                <label for="targetUrl">Link Đăng Ký (URL):</label>
-                <input type="text" id="targetUrl" placeholder="https://dkmh.eiu.edu.vn/..." />
-            </div>
-
-            <div class="input-group">
-                <label for="subjectCode">Mã Môn Học:</label>
-                <input type="text" id="subjectCode" placeholder="VD: ENG101, IT302..." />
-            </div>
-
-            <div class="engine-detection" id="detectionResult">
-                Chưa nhận diện trường...
-            </div>
-
-            <div class="actions">
-                <button id="btnStart" class="btn-primary">Bắt Đầu Đăng Ký</button>
-            </div>
-            
-            <div class="advanced-features">
-                <label><input type="checkbox" id="stealthMode" checked> Stealth Mode (Anti-WAF)</label>
-                <label><input type="checkbox" id="autoLogin" checked> Auto-Login / Session Keeper</label>
-            </div>
-        </main>
-
-        <footer>
-            <span>By NSN/NQH - EIU Student</span>
-            <a href="#" id="openPortal">Donate</a>
-        </footer>
+  <!-- ===== HEADER ===== -->
+  <header class="gz-header">
+    <div class="gz-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
     </div>
-    <script src="popup.js" type="module"></script>
+    <div class="gz-header-text">
+      <h1>GumballZ DKMH</h1>
+      <p>Tự động đăng ký môn học</p>
+    </div>
+    <span class="gz-badge idle" id="gz-status-badge">Sẵn sàng</span>
+  </header>
+
+  <!-- ===== DETECTION BANNER ===== -->
+  <div class="gz-detection not-found" id="gz-detection">
+    <div class="gz-detection-icon">?</div>
+    <span id="gz-detection-text">Dán URL trường để nhận diện engine</span>
+  </div>
+
+  <!-- ===== MAIN BODY ===== -->
+  <main class="gz-body">
+
+    <!-- Card 1: Thông tin đăng nhập -->
+    <div class="gz-card">
+      <div class="gz-card-title">Tài khoản và trường học</div>
+
+      <div class="gz-field">
+        <label class="gz-label" for="gz-school-url">URL Trang Trường</label>
+        <input
+          class="gz-input"
+          type="url"
+          id="gz-school-url"
+          placeholder="https://dkmh.eiu.edu.vn/..."
+          autocomplete="off"
+        >
+      </div>
+
+      <div class="gz-input-row" style="margin-top:9px;">
+        <div class="gz-field">
+          <label class="gz-label" for="gz-username">Mã Sinh Viên</label>
+          <input
+            class="gz-input"
+            type="text"
+            id="gz-username"
+            placeholder="MSV / Tài khoản"
+            autocomplete="username"
+          >
+        </div>
+        <div class="gz-field">
+          <label class="gz-label" for="gz-password">Mật Khẩu</label>
+          <div class="gz-input-wrap">
+            <input
+              class="gz-input"
+              type="password"
+              id="gz-password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+            >
+            <button class="gz-eye-btn" id="gz-toggle-pass" title="Hiện/Ẩn mật khẩu">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                <path id="gz-eye-icon" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <button class="gz-btn gz-btn-ghost gz-btn-sm" id="gz-save-creds" style="width:100%;">
+          Lưu thông tin đăng nhập
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 2: Môn học cần đăng ký -->
+    <div class="gz-card">
+      <div class="gz-card-title">Môn Học Cần Đăng Ký</div>
+
+      <div class="gz-add-course-row">
+        <input
+          class="gz-input"
+          type="text"
+          id="gz-course-input"
+          placeholder="Nhập mã môn học (VD: CS101)"
+          autocomplete="off"
+        >
+        <button class="gz-btn gz-btn-ghost gz-btn-sm" id="gz-add-course">Thêm</button>
+      </div>
+
+      <div class="gz-tags-wrap" id="gz-course-tags">
+        <!-- Tags được thêm vào đây -->
+      </div>
+    </div>
+
+    <!-- Card 3: Tùy chọn kích hoạt -->
+    <div class="gz-card">
+      <div class="gz-card-title">Kích Hoạt</div>
+
+      <!-- Hẹn giờ bắt đầu -->
+      <div class="gz-scheduler-row">
+        <div class="gz-field">
+          <label class="gz-label" for="gz-schedule-time">Hẹn Giờ Bắt Đầu</label>
+          <input class="gz-input" type="datetime-local" id="gz-schedule-time">
+        </div>
+        <button class="gz-btn gz-btn-ghost gz-btn-sm" id="gz-schedule-btn" style="height:36px; align-self:flex-end;">Đặt Giờ</button>
+      </div>
+
+      <div class="gz-countdown" id="gz-countdown">00:00:00</div>
+      <div class="gz-countdown-label" id="gz-countdown-label"></div>
+
+      <!-- Nút điều khiển chính -->
+      <div class="gz-btn-row" style="margin-top:12px;">
+        <button class="gz-btn gz-btn-primary" id="gz-start-btn">
+          <div class="gz-spinner"></div>
+          <span class="gz-btn-label">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Bắt Đầu Đăng Ký
+          </span>
+        </button>
+        <button class="gz-btn gz-btn-danger gz-btn-sm" id="gz-stop-btn" disabled>
+          Dừng
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 4: Tiến trình và Log -->
+    <div class="gz-card gz-progress-wrap" id="gz-progress-card">
+      <div class="gz-card-title">
+        <span class="gz-pulse"></span>
+        Tiến Trình
+      </div>
+
+      <div class="gz-attempt-text">
+        <span id="gz-attempt-label">Đang chuẩn bị...</span>
+        <span id="gz-attempt-count">0 / 0</span>
+      </div>
+
+      <div class="gz-progress-bar-bg">
+        <div class="gz-progress-bar indeterminate" id="gz-progress-bar"></div>
+      </div>
+
+      <div class="gz-log" id="gz-log">
+        <span class="gz-log-entry">Hệ thống sẵn sàng.</span>
+      </div>
+    </div>
+
+    <!-- Card 5: Cài đặt nâng cao -->
+    <div class="gz-card">
+      <button class="gz-btn gz-btn-ghost gz-btn-sm" id="gz-settings-toggle" style="width:100%; justify-content:space-between;">
+        <span>Cài đặt nâng cao</span>
+        <svg id="gz-settings-arrow" viewBox="0 0 24 24" width="14" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform 0.3s;"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+
+      <div class="gz-settings-section" id="gz-settings-section">
+        <div class="gz-divider"></div>
+
+        <div class="gz-toggle-row">
+          <span class="gz-toggle-label">Stealth Mode (mô phỏng người dùng)</span>
+          <button class="gz-toggle on" id="gz-toggle-stealth" title="Bật/Tắt stealth mode"></button>
+        </div>
+
+        <div class="gz-field" style="margin-top:10px;">
+          <label class="gz-label" for="gz-max-retries">Số lần thử tối đa</label>
+          <input class="gz-input" type="number" id="gz-max-retries" value="10" min="1" max="100">
+        </div>
+
+        <div class="gz-field" style="margin-top:8px;">
+          <label class="gz-label" for="gz-tg-token">Telegram Bot Token</label>
+          <input class="gz-input" type="text" id="gz-tg-token" placeholder="110201543:AAXXXXXXXXX">
+        </div>
+
+        <div class="gz-field" style="margin-top:8px;">
+          <label class="gz-label" for="gz-tg-chat">Telegram Chat ID</label>
+          <input class="gz-input" type="text" id="gz-tg-chat" placeholder="-100XXXXXXXXX">
+        </div>
+
+        <div class="gz-btn-row" style="margin-top:10px;">
+          <button class="gz-btn gz-btn-ghost gz-btn-sm" id="gz-save-settings" style="flex:1;">Lưu cài đặt</button>
+          <button class="gz-btn gz-btn-ghost gz-btn-sm" id="gz-test-tg">Test Telegram</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="gz-footer">
+    <div>Phát triển bởi <strong>Nguyễn Quốc Hưng</strong> – EIU Student</div>
+    <div style="margin-top:2px;">
+      <a href="https://github.com/nughnguyen/DKMH-Extension" target="_blank">GitHub</a>
+      &nbsp;&middot;&nbsp;
+      Phiên bản 1.0.0
+    </div>
+    <div style="margin-top:3px; font-size:10px; color:#b0bcd6;">
+      Công cụ hỗ trợ học tập. Không chịu trách nhiệm về sai sót dữ liệu nhà trường.
+    </div>
+  </footer>
+
+  <!-- ===== TOAST ===== -->
+  <div class="gz-toast" id="gz-toast"></div>
+
+  <script src="popup.js"></script>
 </body>
 </html>

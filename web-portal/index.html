@@ -1,77 +1,482 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GumballZ - Đăng Ký Môn Học Siêu Tốc</title>
-    <meta name="description" content="Công cụ tự động hóa quá trình đăng ký môn học tại các trường đại học. Plug and Play, Anti-Ban và vô cùng mạnh mẽ.">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>GumballZ – Tự động đăng ký môn học cho sinh viên Việt Nam</title>
+  <meta name="description" content="GumballZ giúp sinh viên Việt Nam tự động đăng ký môn học, giữ slot và nhận thông báo tức thì. Hỗ trợ EIU, TDMU và nhiều trường khác.">
+  <meta name="author" content="Nguyễn Quốc Hưng">
+  <meta name="keywords" content="đăng ký môn học tự động, chrome extension, EIU, TDMU, sinh viên, DKMH">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GumballZ – Auto DKMH cho Sinh Viên Việt Nam">
+  <meta property="og:description" content="Tự động đăng ký môn học, không cần ngồi canh màn hình. Stealth mode, Telegram notify, Hẹn giờ thông minh.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nughnguyen.github.io/DKMH-Extension">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="blob-bg"></div>
-    
-    <header class="navbar glass-effect">
-        <div class="container nav-content">
-            <h1 class="logo">GumballZ</h1>
-            <nav class="nav-links">
-                <a href="#features">Tính Năng</a>
-                <a href="#docs">Hướng Dẫn</a>
-                <a href="https://github.com/nughnguyen/DKMH-Extension.git" target="_blank">GitHub</a>
-                <a href="#donate" class="btn-primary">Ủng Hộ</a>
-            </nav>
+
+  <!-- ============================================================
+       NAVBAR
+       ============================================================ -->
+  <nav class="gz-nav" id="gz-nav">
+    <div class="gz-nav-inner">
+      <a href="#" class="gz-nav-brand">
+        <div class="gz-nav-logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
         </div>
-    </header>
+        GumballZ
+      </a>
+      <nav class="gz-nav-links">
+        <a href="#tinh-nang"  class="gz-nav-link">Tính năng</a>
+        <a href="#huong-dan"  class="gz-nav-link">Hướng dẫn</a>
+        <a href="#truong-hoc" class="gz-nav-link">Trường học</a>
+        <a href="#donate"     class="gz-nav-link">Ủng hộ</a>
+        <a href="https://github.com/nughnguyen/DKMH-Extension" target="_blank" class="gz-btn-nav">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </nav>
 
-    <main class="container">
-        <section class="hero glass-effect">
-            <div class="hero-text">
-                <h2>Một Mùa Đăng Ký<br><span class="text-gradient">Thảnh Thơi</span></h2>
-                <p>Plug-and-play extension hỗ trợ sinh viên nhanh chóng giành slot môn học mong muốn với công nghệ Stealth, Auto-login, và Multi-threading.</p>
-                <p class="disclaimer"><em>Công cụ hỗ trợ học tập, không chịu trách nhiệm về sai sót dữ liệu của hệ thống nhà trường.</em></p>
-                <div class="hero-actions">
-                    <a href="https://github.com/nughnguyen/DKMH-Extension.git" class="btn-primary" target="_blank">Tải Extension</a>
-                    <a href="#features" class="btn-secondary">Tìm Hiểu Thêm</a>
-                </div>
-            </div>
-        </section>
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="gz-hero">
+    <div class="container">
+      <div class="gz-hero-inner">
 
-        <section id="features" class="features-grid">
-            <div class="feature-card glass-effect">
-                <h3>Stealth & Anti-Ban</h3>
-                <p>Mô phỏng hành vi của người thật (human-like delay) để hạn chế tối đa việc bị hệ thống tường lửa (WAF) nhận diện.</p>
-            </div>
-            <div class="feature-card glass-effect">
-                <h3>Auto-Login & Session Keeper</h3>
-                <p>Gửi heartbeat liên tục, chống treo và giữ phiên đăng nhập hoạt động kể cả khi AFK thời gian dài.</p>
-            </div>
-            <div class="feature-card glass-effect">
-                <h3>Universal Input</h3>
-                <p>Nhận diện chính xác hệ thống trường học (TDMU, EIU...) chỉ từ URL URL của bạn và áp dụng module phù hợp.</p>
-            </div>
-            <div class="feature-card glass-effect status-badge">
-                <h3>Crowdsourced Status</h3>
-                <p>Chia sẻ trạng thái tắc nghẽn server "Server Busy" tới tất cả sinh viên đang online thông qua Cloud Sync.</p>
-            </div>
-        </section>
+        <!-- Left: Content -->
+        <div class="gz-hero-content">
+          <div class="gz-hero-eyebrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Phiên bản 1.0.0 – Mã nguồn mở
+          </div>
 
-        <section id="donate" class="donate-section">
-            <div class="donate-card glass-effect">
-                <h3>Ủng hộ tác giả ☕</h3>
-                <p>Nếu GumballZ giúp bạn có một học kỳ thảnh thơi, hãy mời Hưng một ly cà phê nhé!</p>
-                <img class="qr-code" src="https://api.vietqr.io/image/970422-2331200040-XXXX.jpg?accountName=NGUYEN%20QUOC%20HUNG&amount=20000&addInfo=Donate%20GumballZ" alt="QR Donate">
-                <div class="author-info">
-                    <p>Phát triển bởi: <strong>Nguyễn Quốc Hưng - EIU Student</strong></p>
-                    <a href="https://github.com/nughnguyen" target="_blank" class="github-link">Ghé thăm GitHub của mình</a>
-                </div>
+          <h1 class="gz-hero-title">
+            Tự động đăng ký<br>
+            môn học <span class="gz-highlight">tốc độ cao</span>
+          </h1>
+
+          <p class="gz-hero-desc">
+            GumballZ giúp sinh viên Việt Nam giành slot môn học trước khi server trường
+            quá tải. Không cần ngồi canh màn hình lúc nửa đêm.
+          </p>
+
+          <div class="gz-hero-actions">
+            <a href="https://github.com/nughnguyen/DKMH-Extension" target="_blank" class="gz-btn-hero primary" id="hero-download-btn">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              Tải Extension
+            </a>
+            <a href="#huong-dan" class="gz-btn-hero secondary" id="hero-guide-btn">
+              Xem hướng dẫn
+            </a>
+          </div>
+
+          <div class="gz-hero-stats">
+            <div class="gz-stat">
+              <!-- Số trường được cập nhật động từ engines-manifest.js -->
+              <span class="gz-stat-num" id="stat-active-count">–</span>
+              <span class="gz-stat-label">Trường hỗ trợ</span>
             </div>
-        </section>
-    </main>
+            <div class="gz-stat">
+              <span class="gz-stat-num" data-count="10">10</span>
+              <span class="gz-stat-label">Lần thử tối đa</span>
+            </div>
+            <div class="gz-stat">
+              <span class="gz-stat-num">100%</span>
+              <span class="gz-stat-label">Miễn phí</span>
+            </div>
+          </div>
+        </div>
 
-    <footer class="footer">
-        <p>&copy; 2026 GumballZ Registration Ecosystem. Phát triển bởi Nguyễn Quốc Hưng.</p>
-    </footer>
+        <!-- Right: Popup Mockup -->
+        <div class="gz-hero-visual">
+          <div class="gz-orb gz-orb-1"></div>
+          <div class="gz-orb gz-orb-2"></div>
 
-    <script src="script.js"></script>
+          <div class="gz-popup-mockup">
+            <div class="gz-mock-header">
+              <div class="gz-mock-logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+              </div>
+              <div>
+                <div class="gz-mock-title">GumballZ DKMH</div>
+                <div class="gz-mock-sub">Tự động đăng ký môn học</div>
+              </div>
+              <div class="gz-mock-badge-container">
+                <span class="gz-mock-badge">Đang chạy</span>
+              </div>
+            </div>
+
+            <div class="gz-mock-field">https://dkmh.eiu.edu.vn/...</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+              <div class="gz-mock-field">MSV: 21xxxxxx</div>
+              <div class="gz-mock-field">••••••••</div>
+            </div>
+
+            <div style="font-size:11.5px;color:#8899bb;margin-top:10px;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;">Môn cần đăng ký</div>
+            <div class="gz-mock-tags">
+              <span class="gz-mock-tag">CS101</span>
+              <span class="gz-mock-tag">MATH202</span>
+              <span class="gz-mock-tag">PHY305</span>
+            </div>
+
+            <button class="gz-mock-btn">Đăng ký tự động</button>
+            <div class="gz-mock-progress-bar-bg">
+              <div class="gz-mock-progress-bar"></div>
+            </div>
+            <div style="font-size:11px;color:#8899bb;margin-top:6px;">Lần thử 6/10 – Đang tìm slot...</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURES
+       ============================================================ -->
+  <section class="gz-features-section" id="tinh-nang">
+    <div class="container">
+      <div class="gz-section-header">
+        <div class="gz-label-badge">Tính năng</div>
+        <h2 class="gz-section-title">Mọi thứ bạn cần để<br>giành slot môn học</h2>
+        <p class="gz-section-sub">GumballZ được thiết kế để xử lý những trường hợp khó nhất: server quá tải, CAPTCHA, phiên đăng nhập hết hạn.</p>
+      </div>
+
+      <div class="gz-features-grid">
+
+        <div class="gz-feature-card gz-fade-in" id="feature-autologin">
+          <div class="gz-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          </div>
+          <h3 class="gz-feature-title">Tự động đăng nhập</h3>
+          <p class="gz-feature-desc">Tự động điền form và đăng nhập khi phát hiện trang trường. Hỗ trợ CAPTCHA solver và session keeper 24/7.</p>
+        </div>
+
+        <div class="gz-feature-card gz-fade-in" id="feature-stealth">
+          <div class="gz-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          </div>
+          <h3 class="gz-feature-title">Stealth Mode</h3>
+          <p class="gz-feature-desc">Mô phỏng hành vi người dùng thật với random delay 800–2500ms và jitter ngẫu nhiên, tránh bị WAF của trường phát hiện và chặn.</p>
+        </div>
+
+        <div class="gz-feature-card gz-fade-in" id="feature-scheduler">
+          <div class="gz-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+          </div>
+          <h3 class="gz-feature-title">Hẹn giờ thông minh</h3>
+          <p class="gz-feature-desc">Đặt giờ chính xác đến giây. GumballZ tự động bắt đầu đăng ký đúng vào khung giờ mở sinh viên mà không cần ngồi canh.</p>
+        </div>
+
+        <div class="gz-feature-card gz-fade-in" id="feature-telegram">
+          <div class="gz-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm-1.5-9.5l4.88-4.88-1.06-1.06L9.44 11.44 7.62 9.62l-1.06 1.06 2.88 2.88 1.06-1.06z"/></svg>
+          </div>
+          <h3 class="gz-feature-title">Telegram Notify</h3>
+          <p class="gz-feature-desc">Nhận thông báo tức thì qua Telegram khi đăng ký thành công hoặc thất bại. Biết kết quả ngay cả khi không nhìn màn hình.</p>
+        </div>
+
+        <div class="gz-feature-card gz-fade-in" id="feature-plugplay">
+          <div class="gz-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z"/></svg>
+          </div>
+          <h3 class="gz-feature-title">Plug-and-Play Engine</h3>
+          <p class="gz-feature-desc">Mỗi trường là một module riêng biệt. Sinh viên trường khác có thể tự viết engine và đóng góp vào dự án qua Pull Request.</p>
+        </div>
+
+        <div class="gz-feature-card gz-fade-in" id="feature-multithread">
+          <div class="gz-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm4 5h8v2H8zm3 5h2v2h-2z"/><path d="M20 3H4v18h16zM4 21V5h16v16H4z"/></svg>
+          </div>
+          <h3 class="gz-feature-title">Đa luồng (Multi-thread)</h3>
+          <p class="gz-feature-desc">Chạy nhiều luồng đăng ký song song bằng Web Workers trên các endpoint khác nhau, tăng tỉ lệ thành công khi server trường có nhiều cổng.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW IT WORKS
+       ============================================================ -->
+  <section id="huong-dan">
+    <div class="container">
+      <div class="gz-section-header">
+        <div class="gz-label-badge">Hướng dẫn</div>
+        <h2 class="gz-section-title">Chỉ 4 bước đơn giản</h2>
+        <p class="gz-section-sub">GumballZ được thiết kế để cài đặt nhanh nhất có thể. Không cần cấu hình phức tạp.</p>
+      </div>
+
+      <div class="gz-steps">
+        <div class="gz-step gz-fade-in" id="step-1">
+          <div class="gz-step-num">1</div>
+          <h3 class="gz-step-title">Tải và cài đặt</h3>
+          <p class="gz-step-desc">Tải source code từ GitHub, bật Developer Mode trong Chrome và load folder extension.</p>
+        </div>
+        <div class="gz-step gz-fade-in" id="step-2">
+          <div class="gz-step-num">2</div>
+          <h3 class="gz-step-title">Nhập tài khoản</h3>
+          <p class="gz-step-desc">Mở popup, nhập URL trường, mã sinh viên và mật khẩu. Thông tin chỉ lưu trên máy của bạn.</p>
+        </div>
+        <div class="gz-step gz-fade-in" id="step-3">
+          <div class="gz-step-num">3</div>
+          <h3 class="gz-step-title">Thêm mã môn học</h3>
+          <p class="gz-step-desc">Thêm mã các môn học cần đăng ký. Có thể thêm nhiều môn cùng một lúc.</p>
+        </div>
+        <div class="gz-step gz-fade-in" id="step-4">
+          <div class="gz-step-num">4</div>
+          <h3 class="gz-step-title">Bắt đầu và nghỉ ngơi</h3>
+          <p class="gz-step-desc">Nhấn "Bắt Đầu Đăng Ký" hoặc đặt hẹn giờ. GumballZ sẽ tự động lo phần còn lại.</p>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="gz-disclaimer gz-fade-in" id="disclaimer-box" style="max-width:720px;margin:48px auto 0;">
+        <div class="gz-disclaimer-icon">!</div>
+        <div class="gz-disclaimer-text">
+          <strong>Tuyên bố miễn trừ trách nhiệm:</strong>
+          GumballZ là công cụ hỗ trợ học tập và được cung cấp hoàn toàn miễn phí.
+          Chúng tôi không chịu trách nhiệm về bất kỳ sai sót dữ liệu nào của hệ thống nhà trường,
+          mất slot môn học, hoặc các hậu quả phát sinh từ việc sử dụng công cụ này.
+          Người dùng chịu toàn bộ trách nhiệm đối với việc sử dụng công cụ.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SUPPORTED UNIVERSITIES (được render động từ engines-manifest.js)
+       ============================================================ -->
+  <section id="truong-hoc" style="background: var(--c-bg-2); border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);">
+    <div class="container">
+      <div class="gz-section-header">
+        <div class="gz-label-badge">Trường học</div>
+        <h2 class="gz-section-title">Các trường được hỗ trợ</h2>
+        <p class="gz-section-sub" id="unis-subtitle">
+          Danh sách này sẽ tiếp tục mở rộng. Sinh viên các trường khác có thể đóng góp engine qua GitHub.
+        </p>
+      </div>
+
+      <!-- Grid được render 100% bởi JavaScript từ engines-manifest.js -->
+      <div class="gz-unis-grid" id="gz-unis-grid">
+        <!-- Populated by script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVER STATUS
+       ============================================================ -->
+  <section class="gz-status-section" id="trang-thai">
+    <div class="container">
+      <div class="gz-section-header" style="margin-bottom:40px;">
+        <div class="gz-label-badge">Trạng thái</div>
+        <h2 class="gz-section-title">Trạng thái server trường học</h2>
+        <p class="gz-section-sub">Dữ liệu từ cộng đồng người dùng (cập nhật mỗi 30 giây – Demo).</p>
+      </div>
+
+      <div class="gz-status-grid" id="gz-status-grid">
+        <!-- Filled by script.js -->
+      </div>
+
+      <p class="gz-status-note" id="gz-status-updated">Đang tải...</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DONATE & AUTHOR
+       ============================================================ -->
+  <section class="gz-donate-section" id="donate">
+    <div class="container">
+      <div class="gz-section-header">
+        <div class="gz-label-badge">Ủng hộ tác giả</div>
+        <h2 class="gz-section-title">GumballZ hoàn toàn miễn phí</h2>
+        <p class="gz-section-sub">Nếu công cụ này giúp bạn có một học kỳ thảnh thơi, hãy ủng hộ tác giả một chút để duy trì và phát triển thêm.</p>
+      </div>
+
+      <div class="gz-donate-inner">
+
+        <!-- Left: Content + Author -->
+        <div>
+          <div class="gz-section-title" style="font-size:28px;">Một ly cà phê<br>cho tác giả</div>
+          <p class="gz-section-sub" style="margin-top:14px;">
+            GumballZ được phát triển và bảo trì hoàn toàn bởi một sinh viên EIU trong thời gian rảnh.
+            Mỗi đồng ủng hộ là động lực để tiếp tục phát triển, thêm trường mới và cải thiện tính năng.
+          </p>
+
+          <!-- Author Card -->
+          <div class="gz-author-card gz-fade-in" id="author-card">
+            <div class="gz-author-inner">
+              <div class="gz-author-avatar">H</div>
+              <div>
+                <div class="gz-author-name">Nguyễn Quốc Hưng</div>
+                <div class="gz-author-role">EIU Student – Full-stack Developer</div>
+              </div>
+            </div>
+            <div class="gz-author-links">
+              <a href="https://github.com/nughnguyen" target="_blank" class="gz-author-link" id="github-link">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+                nughnguyen
+              </a>
+              <a href="mailto:hungnguyenqn@gmail.com" class="gz-author-link" id="email-link">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Liên hệ
+              </a>
+            </div>
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="gz-disclaimer gz-fade-in" style="margin-top:20px;" id="footer-disclaimer">
+            <div class="gz-disclaimer-icon">!</div>
+            <div class="gz-disclaimer-text">
+              <strong>Phát triển bởi Nguyễn Quốc Hưng – EIU Student.</strong>
+              Công cụ hỗ trợ học tập, không chịu trách nhiệm về sai sót dữ liệu của hệ thống nhà trường.
+              Sử dụng ở trách nhiệm cá nhân.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Donate Card -->
+        <div class="gz-donate-card gz-fade-in" id="donate-card">
+          <h3 class="gz-donate-card-title">Ủng hộ tác giả</h3>
+          <p class="gz-donate-card-sub">
+            Quét mã QR hoặc chuyển khoản trực tiếp.<br>
+            Mỗi số tiền đều được trân trọng.
+          </p>
+
+          <!-- QR Code – VietQR OCB API -->
+          <div class="gz-qr-wrap" id="gz-qr-wrap">
+            <img
+              id="gz-qr-img"
+              src="https://img.vietqr.io/image/OCB-0388205003-qr_only.png?accountName=NGUYEN%20QUOC%20HUNG&amount=20000&addInfo=Donate%20GumballZ"
+              alt="QR Chuyển khoản OCB – Nguyễn Quốc Hưng"
+              loading="lazy"
+              onerror="this.style.display='none'; document.getElementById('gz-qr-fallback').style.display='flex';"
+            >
+            <div id="gz-qr-fallback" style="display:none; width:200px; height:200px; align-items:center; justify-content:center; flex-direction:column; gap:8px; color:#8899bb; font-size:13px; text-align:center;">
+              <svg width="40" height="40" fill="#c7d2fe" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2zm2 2h2v2h-2zm2-2h2v2h-2zm2 2h2v2h-2zm-4 2h2v2h-2zm2 2h2v2h-2zm-2-6h2v2h-2zm4 4h2v2h-2z"/></svg>
+              QR không tải được.<br>Vui lòng quét thủ công.
+            </div>
+          </div>
+
+          <!-- Bank Info -->
+          <div class="gz-bank-info" id="bank-info">
+            <div class="gz-bank-row">
+              <span class="gz-bank-label">Ngân hàng</span>
+              <span class="gz-bank-value">OCB (Ngân hàng Phương Đông)</span>
+            </div>
+            <div class="gz-bank-row">
+              <span class="gz-bank-label">Số tài khoản</span>
+              <span style="display:flex;align-items:center;gap:8px;">
+                <strong class="gz-bank-value" id="gz-stk">0388205003</strong>
+                <button class="gz-copy-btn" onclick="copySTK()" id="copy-stk-btn" title="Sao chép STK">Sao chép</button>
+              </span>
+            </div>
+            <div class="gz-bank-row">
+              <span class="gz-bank-label">Chủ tài khoản</span>
+              <span class="gz-bank-value">NGUYỄN QUỐC HƯNG</span>
+            </div>
+            <div class="gz-bank-row">
+              <span class="gz-bank-label">Nội dung CK</span>
+              <span class="gz-bank-value" style="font-weight:500; color: var(--c-text-2);">Donate GumballZ</span>
+            </div>
+          </div>
+
+          <!-- Amount suggestion -->
+          <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
+            <button class="gz-amount-btn active" onclick="selectAmount(20000)"  id="amt-20k"  data-amount="20000">20.000đ</button>
+            <button class="gz-amount-btn"        onclick="selectAmount(50000)"  id="amt-50k"  data-amount="50000">50.000đ</button>
+            <button class="gz-amount-btn"        onclick="selectAmount(100000)" id="amt-100k" data-amount="100000">100.000đ</button>
+          </div>
+          
+          <!-- Custom amount input -->
+          <div style="margin-top:12px;">
+            <input type="number" id="gz-custom-amount" class="gz-custom-amount-input" placeholder="Nhập số tiền khác (VD: 500000)..." min="0" step="10000">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="gz-footer">
+    <div class="gz-footer-inner">
+      <div class="gz-footer-brand">
+        <div class="gz-footer-logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        </div>
+        GumballZ
+      </div>
+
+      <ul class="gz-footer-links">
+        <li><a href="#tinh-nang">Tính năng</a></li>
+        <li><a href="#huong-dan">Hướng dẫn</a></li>
+        <li><a href="https://github.com/nughnguyen/DKMH-Extension" target="_blank">GitHub</a></li>
+        <li><a href="https://github.com/nughnguyen/DKMH-Extension/blob/main/CONTRIBUTING.md" target="_blank">Đóng góp</a></li>
+      </ul>
+
+      <div class="gz-footer-copy">
+        Phát triển bởi <strong style="color:rgba(255,255,255,.85);">Nguyễn Quốc Hưng</strong> – EIU Student &nbsp;&middot;&nbsp;
+        GumballZ Registration Ecosystem v1.0.0 &nbsp;&middot;&nbsp;
+        MIT License
+      </div>
+    </div>
+  </footer>
+
+  <!-- Amount button styles -->
+  <style>
+    .gz-amount-btn {
+      flex: 1;
+      min-width: 80px;
+      padding: 8px 10px;
+      background: var(--c-primary-l);
+      border: 1.5px solid #c7d2fe;
+      border-radius: 9px;
+      color: var(--c-primary);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .gz-amount-btn:hover,
+    .gz-amount-btn.active {
+      background: var(--c-grad-1);
+      color: #fff;
+      border-color: transparent;
+    }
+    
+    .gz-custom-amount-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--c-border);
+      border-radius: 9px;
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--c-text);
+      outline: none;
+      transition: all 0.2s;
+      background: var(--c-surface);
+    }
+    .gz-custom-amount-input:focus {
+      border-color: var(--c-primary);
+      box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.15);
+    }
+  </style>
+
+  <!-- Nguồn dữ liệu engine – phải load TRƯỚC script.js -->
+  <script src="engines-manifest.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

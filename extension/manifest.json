@@ -1,30 +1,68 @@
 {
   "manifest_version": 3,
-  "name": "GumballZ Registration",
+  "name": "GumballZ - Auto DKMH",
   "version": "1.0.0",
-  "description": "Premium Auto-Registration Extension with Stealth and Multi-Threading.",
-  "permissions": [
-    "storage",
-    "alarms",
-    "scripting",
-    "activeTab",
-    "tabs"
-  ],
-  "host_permissions": [
-    "*://*/*"
-  ],
+  "description": "Tu dong dang ky mon hoc cho sinh vien Viet Nam. Phat trien boi Nguyen Quoc Hung - EIU Student.",
+  "author": "Nguyen Quoc Hung",
+
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+
+  "action": {
+    "default_popup": "UIUX/popup.html",
+    "default_title": "GumballZ DKMH",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png"
+    }
+  },
+
   "background": {
-    "service_worker": "background/background.js",
+    "service_worker": "background.js",
     "type": "module"
   },
-  "action": {
-    "default_popup": "UIUX/popup.html"
-  },
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["prod/tasks/polling.js"],
+      "js": [
+        "prod/skills/session_keeper.js",
+        "prod/tasks/auto_login.js",
+        "prod/engine_controller.js"
+      ],
       "run_at": "document_idle"
     }
-  ]
+  ],
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "alarms",
+    "notifications",
+    "identity"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "prod/implementation/*.js",
+        "prod/tasks/*.js",
+        "prod/skills/*.js",
+        "assets/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }

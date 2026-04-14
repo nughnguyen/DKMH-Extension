@@ -1,42 +1,115 @@
 # GumballZ Registration Ecosystem
 
-![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
-![Status](https://img.shields.io/badge/Status-Active-success)
+![Build](https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
+![Manifest](https://img.shields.io/badge/Manifest-V3-orange?style=flat-square)
 
-Phát triển bởi: **Nguyễn Quốc Hưng - EIU Student**
+> **Cong cu ho tro dang ky mon hoc tu dong cho sinh vien Viet Nam.**
+> Khong chiu trach nhiem ve sai sot du lieu cua he thong nha truong.
 
-## Giới thiệu
+**Phat trien boi: Nguyen Quoc Hung - EIU Student**
 
-GumballZ Registration Ecosystem là một công cụ toàn diện hỗ trợ sinh viên các trường đại học (như EIU, TDMU...) trong việc đăng ký môn học một cách nhanh chóng và tự động. Hệ thống báo gồm một Chrome Extension hoạt động như một Engine thông minh tự động nhận diện hệ thống trường, và một Landing Page tích hợp.
+---
 
-_Disclaimer: Công cụ hỗ trợ học tập, không chịu trách nhiệm về sai sót dữ liệu của hệ thống nhà trường._
+## Tinh nang noi bat
 
-## Cấu trúc Hệ thống
+- **Plug-and-Play Engine**: Moi truong dai hoc la mot module rieng biet, de dang mo rong
+- **Auto-Login & Session Keeper**: Tu dong dang nhap va duy tri phien lam viec
+- **Stealth Mode**: Mo phong hanh vi nguoi dung de tranh bi WAF phat hien
+- **Scheduled Start**: Hen gio tu dong bat dau dang ky
+- **Telegram Notify**: Thong bao ket qua tuc thi qua Telegram
+- **Multi-Engine**: Ho tro EIU, TDMU va nhieu truong khac (coming soon)
 
-Hệ thống được thiết kế theo dạng Plug-and-Play (Scalable Architecture):
+---
 
-- **Extension Core**:
-  - `prod/implementation/`: Nơi chứa Engine riêng biệt cho từng trường (VD: `eiu_engine.js`, `tdmu_engine.js`).
-  - `prod/tasks/`: Chứa các module chức năng (Đăng ký, Polling, Retry, Auto-login).
-  - `prod/skills/`: Xử lý ngoại vi (Giải Captcha, Session Keeper).
-  - `UIUX/`: Giao diện tương tác người dùng (Glassmorphism, Animations).
-- **Web Portal**: Landing Page giới thiệu, hướng dẫn sử dụng và hỗ trợ dự án.
+## Cac truong duoc ho tro
 
-## Tính năng Nổi bật
+| Truong | Engine | Trang thai |
+|--------|--------|-----------|
+| EIU - East International University | `eiu_engine.js` | Active |
+| TDMU - Thu Dau Mot University | `tdmu_engine.js` | Beta |
+| TDTU - Ton Duc Thang University | Dang nghien cuu | Coming Soon |
 
-- **Auto-Login & Session Keeper**: Duy trì trạng thái sống rải rác (heartbeat) để tránh bị Logout khi treo máy.
-- **Universal Input**: Tự động nhận diện trường học khi dán URL và áp dụng script tương ứng.
-- **Stealth & Anti-Ban**: Mô phỏng hành vi của người thật (Human-like delays) nhằm vượt qua các hệ thống tường lửa (WAF).
-- **Cloud Sync & Smart Schedule Preview**: Đồng bộ dữ liệu, lịch học đa nền tảng (sắp ra mắt).
+---
 
-## Hướng dẫn cài đặt
+## Cai dat
 
-1. Clone Repository này về máy.
-2. Mở Chrome, truy cập: `chrome://extensions/`.
-3. Bật **Developer mode**.
-4. Chọn **Load unpacked** và trỏ đến thư mục `/extension`.
+### Yeu cau
+- Google Chrome phien ban 88 tro len
+- (Ty chon) Telegram Bot Token de nhan thong bao
 
-## Đóng góp
+### Huong dan cai dat Extension
 
-Vui lòng tham khảo file `CONTRIBUTING.md` để biết cách viết thêm Engine cho trường của bạn và gửi Pull Request.
+1. **Tai source code**:
+   ```bash
+   git clone https://github.com/nughnguyen/DKMH-Extension.git
+   cd DKMH-Extension
+   ```
+
+2. **Mo Chrome Extension Manager**:
+   - Truy cap `chrome://extensions/`
+   - Bat **Developer mode** (goc tren ben phai)
+
+3. **Load extension**:
+   - Nhan **Load unpacked**
+   - Chon folder `extension/` trong du an
+
+4. **Cau hinh**:
+   - Nhan bieu tuong GumballZ tren toolbar
+   - Nhap URL truong, tai khoan, mat khau
+   - Nhap ma mon hoc can dang ky
+   - Nhan **Bat dau**
+
+---
+
+## Cau truc du an
+
+```
+DKMH-Extension/
+├── extension/                    # Chrome Extension (Manifest V3)
+│   ├── manifest.json
+│   ├── background.js             # Service Worker
+│   ├── prod/
+│   │   ├── engine_controller.js  # Bo dieu phoi engine
+│   │   ├── implementation/       # Engine cho tung truong
+│   │   │   ├── eiu_engine.js
+│   │   │   └── tdmu_engine.js
+│   │   ├── tasks/                # Logic nghiep vu
+│   │   │   ├── registration_task.js
+│   │   │   ├── auto_login.js
+│   │   │   └── scheduler.js
+│   │   └── skills/               # Ky nang mo rong
+│   │       ├── captcha_solver.js
+│   │       ├── telegram_notify.js
+│   │       └── session_keeper.js
+│   └── UIUX/                     # Giao dien Popup
+│       ├── popup.html
+│       ├── popup.css
+│       └── popup.js
+├── web-portal/                   # Landing Page
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── context/
+│   └── project_context.md
+├── README.md
+└── CONTRIBUTING.md
+```
+
+---
+
+## De ve dong gop (Sinh vien truong khac)
+
+Xem [CONTRIBUTING.md](./CONTRIBUTING.md) de biet cach viet engine cho truong cua ban va gui Pull Request.
+
+---
+
+## License
+
+MIT License - Xem [LICENSE](./LICENSE) de biet them chi tiet.
+
+---
+
+*GumballZ Registration Ecosystem - Phat trien boi Nguyen Quoc Hung, EIU Student*
