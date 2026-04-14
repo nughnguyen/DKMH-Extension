@@ -17,6 +17,7 @@ git checkout -b feature/ten-truong-engine
 ### 2. Tao file engine moi
 
 Tao file moi trong `extension/prod/implementation/`:
+
 ```
 ten_truong_engine.js
 ```
@@ -34,23 +35,20 @@ const TenTruongEngine = {
   // ===== THONG TIN TRUONG (BAT BUOC) =====
   schoolName: "Ten day du cua truong",
   shortName: "TEN",
-  
+
   // URL patterns de nhan dien truong
   // Su dung regex hoac string
-  urlPatterns: [
-    "tentruong.edu.vn",
-    "dkmh.tentruong.edu.vn"
-  ],
+  urlPatterns: ["tentruong.edu.vn", "dkmh.tentruong.edu.vn"],
 
   // ===== SELECTORS (BAT BUOC) =====
   // CSS selectors cho cac phan tu tren trang truong
   selectors: {
-    usernameField: "#username",    // O nhap ten dang nhap
-    passwordField: "#password",    // O nhap mat khau
-    loginButton: "#btn-login",     // Nut dang nhap
-    courseSearchInput: "#ma-mon",  // O nhap ma mon hoc
+    usernameField: "#username", // O nhap ten dang nhap
+    passwordField: "#password", // O nhap mat khau
+    loginButton: "#btn-login", // Nut dang nhap
+    courseSearchInput: "#ma-mon", // O nhap ma mon hoc
     registerButton: ".btn-register", // Nut dang ky
-    statusMessage: ".alert"        // Khu vuc hien thi ket qua
+    statusMessage: ".alert", // Khu vuc hien thi ket qua
   },
 
   // ===== METHODS (BAT BUOC) =====
@@ -61,8 +59,10 @@ const TenTruongEngine = {
    */
   isLoginPage() {
     // Vi du:
-    return window.location.href.includes("/login") || 
-           !!document.querySelector(this.selectors.usernameField);
+    return (
+      window.location.href.includes("/login") ||
+      !!document.querySelector(this.selectors.usernameField)
+    );
   },
 
   /**
@@ -103,7 +103,7 @@ const TenTruongEngine = {
   async sendHeartbeat() {
     // Tuy chon: Fetch mot URL no-op de giu session
     // Vi du: await fetch("/api/ping", { credentials: "include" });
-  }
+  },
 };
 
 // QUAN TRONG: Phai export dung ten bien
@@ -124,14 +124,15 @@ const ENGINE_REGISTRY = [
   {
     patterns: ["tentruong.edu.vn"],
     file: "ten_truong_engine.js",
-    name: "Ten Truong Dai Hoc"
-  }
+    name: "Ten Truong Dai Hoc",
+  },
 ];
 ```
 
 ### 5. Viet tests (Khuyen khich)
 
 Tao file test trong `extension/prod/implementation/tests/`:
+
 ```
 ten_truong_engine.test.js
 ```
@@ -173,9 +174,10 @@ Them truong cua ban vao bang "Cac truong duoc ho tro" trong `README.md`.
 ## Lien he ho tro
 
 Gap kho khan? Lien he qua:
+
 - GitHub Issues: [nughnguyen/DKMH-Extension/issues](https://github.com/nughnguyen/DKMH-Extension/issues)
-- Email: hungnguyenqn@gmail.com
+- Email: hungnq.august.work@gmail.com
 
 ---
 
-*Cam on vi dong gop de GumballZ ngay cang tot hon!*
+_Cam on vi dong gop de GumballZ ngay cang tot hon!_

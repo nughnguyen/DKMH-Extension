@@ -114,17 +114,17 @@
               </div>
             </div>
 
-            <div class="gz-mock-field">https://dkmh.eiu.edu.vn/...</div>
+            <div class="gz-mock-field">https://aao.eiu.edu.vn/...</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
-              <div class="gz-mock-field">MSV: 21xxxxxx</div>
+              <div class="gz-mock-field">MSV: 23xxxxxx</div>
               <div class="gz-mock-field">••••••••</div>
             </div>
 
             <div style="font-size:11.5px;color:#8899bb;margin-top:10px;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;">Môn cần đăng ký</div>
             <div class="gz-mock-tags">
-              <span class="gz-mock-tag">CS101</span>
-              <span class="gz-mock-tag">MATH202</span>
-              <span class="gz-mock-tag">PHY305</span>
+              <span class="gz-mock-tag">MATH111</span>
+              <span class="gz-mock-tag">PHYS101</span>
+              <span class="gz-mock-tag">CSE100</span>
             </div>
 
             <button class="gz-mock-btn">Đăng ký tự động</button>
@@ -353,7 +353,7 @@
           </p>
 
           <!-- QR Code – VietQR OCB API -->
-          <div class="gz-qr-wrap" id="gz-qr-wrap">
+          <div class="gz-qr-wrap" id="gz-qr-wrap" style="position: relative;">
             <img
               id="gz-qr-img"
               src="https://img.vietqr.io/image/OCB-0388205003-qr_only.png?accountName=NGUYEN%20QUOC%20HUNG&amount=20000&addInfo=Donate%20GumballZ"
@@ -365,6 +365,10 @@
               <svg width="40" height="40" fill="#c7d2fe" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2zm2 2h2v2h-2zm2-2h2v2h-2zm2 2h2v2h-2zm-4 2h2v2h-2zm2 2h2v2h-2zm-2-6h2v2h-2zm4 4h2v2h-2z"/></svg>
               QR không tải được.<br>Vui lòng quét thủ công.
             </div>
+            <!-- Nút Tải mã QR -->
+            <button class="gz-download-qr-btn" id="gz-download-qr" onclick="downloadQR()" title="Tải mã QR" style="position: absolute; bottom: 8px; right: 8px; width: 32px; height: 32px; border-radius: 50%; background: var(--c-primary); color: #fff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow-clay-outer-sm); transition: transform 0.2s;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            </button>
           </div>
 
           <!-- Bank Info -->
@@ -439,39 +443,44 @@
     .gz-amount-btn {
       flex: 1;
       min-width: 80px;
-      padding: 8px 10px;
-      background: var(--c-primary-l);
-      border: 1.5px solid #c7d2fe;
-      border-radius: 9px;
-      color: var(--c-primary);
-      font-size: 13px;
-      font-weight: 600;
+      padding: 10px 10px;
+      background: var(--c-surface);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: var(--c-text);
+      font-size: 13.5px;
+      font-weight: 700;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
-      transition: all 0.2s;
+      box-shadow: var(--shadow-clay-outer-sm);
+      transition: all 0.25s;
     }
-    .gz-amount-btn:hover,
+    .gz-amount-btn:active {
+      box-shadow: var(--shadow-clay-inner-sm);
+      transform: translateY(1px);
+    }
     .gz-amount-btn.active {
-      background: var(--c-grad-1);
+      background: var(--c-primary);
       color: #fff;
-      border-color: transparent;
+      box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.15), inset -3px -3px 6px rgba(255, 255, 255, 0.2);
     }
     
     .gz-custom-amount-input {
       width: 100%;
-      padding: 10px 14px;
-      border: 1.5px solid var(--c-border);
-      border-radius: 9px;
+      padding: 12px 14px;
+      border: none;
+      border-radius: var(--radius-sm);
       font-size: 13.5px;
       font-family: inherit;
       color: var(--c-text);
       outline: none;
-      transition: all 0.2s;
+      transition: all 0.25s;
       background: var(--c-surface);
+      box-shadow: var(--shadow-clay-inner);
     }
     .gz-custom-amount-input:focus {
-      border-color: var(--c-primary);
-      box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.15);
+      background: var(--c-primary-l);
+      box-shadow: inset 5px 5px 10px var(--c-clay-sh), inset -5px -5px 10px var(--c-clay-hl);
     }
   </style>
 

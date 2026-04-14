@@ -17,70 +17,70 @@
 const GUMBALLZ_ENGINES = [
   // ==================== ĐANG HOẠT ĐỘNG ====================
   {
-    shortName:  "EIU",
-    fullName:   "ĐH Quốc tế Miền Đông (Eastern International University)",
-    file:       "eiu_engine.js",
-    status:     "active",          // active | beta | soon | research
-    statusLabel:"Đang hoạt động",
-    system:     "AQTech",
+    shortName: "EIU",
+    fullName: "ĐH Quốc tế Miền Đông (Eastern International University)",
+    file: "eiu_engine.js",
+    status: "active",          // active | beta | soon | research
+    statusLabel: "Đang hoạt động",
+    system: "AQTech",
     urlPatterns: ["eiu.edu.vn", "aqtea-eiu", "dkmh.eiu"],
-    addedDate:  "2026-04-13"
+    addedDate: "2026-04-13"
   },
 
   // ==================== BETA ====================
   {
-    shortName:  "TDMU",
-    fullName:   "ĐH Thủ Dầu Một (Thu Dau Mot University)",
-    file:       "tdmu_engine.js",
-    status:     "beta",
-    statusLabel:"Beta",
-    system:     "AQTech",
+    shortName: "TDMU",
+    fullName: "ĐH Thủ Dầu Một (Thu Dau Mot University)",
+    file: "tdmu_engine.js",
+    status: "beta",
+    statusLabel: "Beta",
+    system: "AQTech",
     urlPatterns: ["tdmu.edu.vn", "qldt.tdmu", "dkmh.tdmu"],
-    addedDate:  "2026-04-13"
+    addedDate: "2026-04-13"
   },
 
   // ==================== SẮP RA MẮT ====================
   {
-    shortName:  "TDTU",
-    fullName:   "ĐH Tôn Đức Thắng (Ton Duc Thang University)",
-    file:       null,
-    status:     "soon",
-    statusLabel:"Sắp ra mắt",
-    system:     "AQTech",
+    shortName: "TDTU",
+    fullName: "ĐH Tôn Đức Thắng (Ton Duc Thang University)",
+    file: null,
+    status: "soon",
+    statusLabel: "Sắp ra mắt",
+    system: "AQTech",
     urlPatterns: ["tdtu.edu.vn", "dkmh.tdtu"],
-    addedDate:  null
+    addedDate: null
   },
   {
-    shortName:  "UEH",
-    fullName:   "ĐH Kinh tế TP.HCM (University of Economics)",
-    file:       null,
-    status:     "soon",
-    statusLabel:"Sắp ra mắt",
-    system:     "Custom",
+    shortName: "UEH",
+    fullName: "ĐH Kinh tế TP.HCM (University of Economics)",
+    file: null,
+    status: "soon",
+    statusLabel: "Sắp ra mắt",
+    system: "Custom",
     urlPatterns: ["ueh.edu.vn", "dkmonhoc.ueh"],
-    addedDate:  null
+    addedDate: null
   },
 
   // ==================== ĐANG NGHIÊN CỨU ====================
   {
-    shortName:  "HCMUT",
-    fullName:   "ĐH Bách Khoa TP.HCM (HCMUT)",
-    file:       null,
-    status:     "research",
-    statusLabel:"Đang nghiên cứu",
-    system:     "Edusofts",
+    shortName: "HCMUT",
+    fullName: "ĐH Bách Khoa TP.HCM (HCMUT)",
+    file: null,
+    status: "research",
+    statusLabel: "Đang nghiên cứu",
+    system: "Edusofts",
     urlPatterns: ["hcmut.edu.vn", "mybk.hcmut"],
-    addedDate:  null
+    addedDate: null
   },
   {
-    shortName:  "UIT",
-    fullName:   "ĐH Công nghệ Thông tin (UIT - VNU-HCM)",
-    file:       null,
-    status:     "research",
-    statusLabel:"Đang nghiên cứu",
-    system:     "Custom",
+    shortName: "UIT",
+    fullName: "ĐH Công nghệ Thông tin (UIT - VNU-HCM)",
+    file: null,
+    status: "research",
+    statusLabel: "Đang nghiên cứu",
+    system: "Custom",
     urlPatterns: ["uit.edu.vn", "student.uit"],
-    addedDate:  null
+    addedDate: null
   }
 ];
 

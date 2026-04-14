@@ -65,7 +65,7 @@ function renderUniversities() {
 
     card.innerHTML = `
       <div class="gz-uni-abbr${isActive ? "" : " dev"}">${eng.shortName}</div>
-      <div class="gz-uni-info">
+      <div class="gz-uni-info" data-tooltip="${eng.fullName}">
         <div class="gz-uni-name">${eng.fullName}</div>
         <span class="gz-uni-status ${eng.status}">${eng.statusLabel}</span>
       </div>
@@ -79,7 +79,7 @@ function renderUniversities() {
   contributeCard.className = "gz-uni-card gz-fade-in";
   contributeCard.id        = "uni-contribute";
   contributeCard.innerHTML = `
-    <div class="gz-uni-abbr" style="background: linear-gradient(135deg,#e8edff,#dde5ff); color: var(--c-primary);">+</div>
+    <div class="gz-uni-abbr" style="background: var(--c-surface); color: var(--c-primary);">+</div>
     <div class="gz-uni-info">
       <div class="gz-uni-name" style="color: var(--c-primary);">Trường của bạn?</div>
       <a href="https://github.com/nughnguyen/DKMH-Extension/blob/main/CONTRIBUTING.md"
@@ -220,7 +220,7 @@ window.copySTK = function () {
 // ============================================================
 // DYNAMIC QR THEO SỐ TIỀN
 // ============================================================
-const QR_BASE    = "https://api.vietqr.io/image/970212-0388205003-compact2.jpg";
+const QR_BASE    = "https://img.vietqr.io/image/OCB-0388205003-qr_only.png";
 const QR_NAME    = "NGUYEN QUOC HUNG";
 const QR_NOTE    = "Donate GumballZ";
 
@@ -244,6 +244,35 @@ window.selectAmount = function (amount) {
     qrImg.style.display = "block";
     const fallback = document.getElementById("gz-qr-fallback");
     if (fallback) fallback.style.display = "none";
+  }
+};
+
+window.downloadQR = async function() {
+  const qrImg = document.getElementById("gz-qr-img");
+  if (!qrImg || qrImg.style.display === "none" || !qrImg.src) return;
+
+  try {
+    const response = await fetch(qrImg.src);
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = `GumballZ_QR_ThanhToan.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(blobUrl);
+
+    // Optional visual feedback on button
+    const btn = document.getElementById("gz-download-qr");
+    if (btn) {
+      btn.style.transform = "scale(0.9)";
+      setTimeout(() => btn.style.transform = "none", 150);
+    }
+  } catch (err) {
+    console.error("Lỗi khi tải mã QR:", err);
+    alert("Không thể tải mã QR lúc này. Vui lòng quét trực tiếp.");
   }
 };
 
