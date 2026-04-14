@@ -46,7 +46,8 @@ const el = {
   tgChat:          $("gz-tg-chat"),
   saveSettings:    $("gz-save-settings"),
   testTg:          $("gz-test-tg"),
-  toast:           $("gz-toast")
+  toast:           $("gz-toast"),
+  currentVersion:  $("gz-current-version")
 };
 
 // ============================================================
@@ -66,6 +67,9 @@ let state = {
 // INIT
 // ============================================================
 async function init() {
+  if (el.currentVersion) {
+    el.currentVersion.textContent = chrome.runtime.getManifest().version;
+  }
   await loadFromStorage();
   renderCourseTags();
   detectEngine();
