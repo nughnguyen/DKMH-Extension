@@ -148,13 +148,24 @@ async function _handleScheduledStart() {
 
 async function _checkForUpdates() {
   try {
+    const localVer = chrome.runtime.getManifest().version;
+    
+    // Xóa badge nếu version thực tế đã khớp (trước khi gọi API để phòng lỗi rate limit)
+    const store = await chrome.storage.local.get("gumballz_update_info");
+    if (store.gumballz_update_info) {
+      const cachedVer = store.gumballz_update_info.version.replace('v', '');
+      if (cachedVer === localVer) {
+        await chrome.storage.local.remove("gumballz_update_info");
+        chrome.action.setBadgeText({ text: "" });
+      }
+    }
+
     const res = await fetch("https://api.github.com/repos/nughnguyen/DKMH-Extension/releases/latest");
     if (!res.ok) return;
     const data = await res.json();
     
     // So sanh phien ban: Xoa chu 'v' neu co (vd 'v1.0.1' -> '1.0.1')
     const remoteVer = data.tag_name.replace('v', '');
-    const localVer = chrome.runtime.getManifest().version;
 
     // Kiem tra thu cong chuoi phien ban don gian (gia su hinh thuc x.y.z)
     if (remoteVer !== localVer) {
@@ -165,8 +176,14 @@ async function _checkForUpdates() {
           url: data.html_url
         }
       });
-      chrome.action.setBadgeText({ text: "NEW" });
-      try { chrome.action.setBadgeBackgroundColor({ color: "#ef4444" }); } catch(e){}
+      // Kiem tra xem nguoi dung da an thong bao update nay chua
+      const { gumballz_dismissed_update } = await chrome.storage.local.get("gumballz_dismissed_update");
+      if (gumballz_dismissed_update !== data.tag_name) {
+        chrome.action.setBadgeText({ text: "NEW" });
+        try { chrome.action.setBadgeBackgroundColor({ color: "#ef4444" }); } catch(e){}
+      } else {
+        chrome.action.setBadgeText({ text: "" }); // Đã ẩn thì không hiện badge
+      }
     } else {
       await chrome.storage.local.remove("gumballz_update_info");
       chrome.action.setBadgeText({ text: "" });

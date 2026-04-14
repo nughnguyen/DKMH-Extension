@@ -82,19 +82,36 @@ async function loadFromStorage() {
     "gumballz_settings",
     "gumballz_courses",
     "gumballz_status",
-    "gumballz_courses",
-    "gumballz_status",
     "gumballz_scheduled_time",
-    "gumballz_update_info"
+    "gumballz_update_info",
+    "gumballz_dismissed_update"
   ]);
 
   // Hien thi cap nhat neu co bai
   if (data.gumballz_update_info) {
-    el.updateVersion.textContent = data.gumballz_update_info.version;
-    let notes = data.gumballz_update_info.notes || "";
-    notes = notes.length > 80 ? notes.substring(0, 80) + '...' : notes;
-    el.updateNotes.textContent = notes;
-    el.updateBanner.style.display = 'flex';
+    const localVer = chrome.runtime.getManifest().version;
+    const remoteVer = data.gumballz_update_info.version.replace('v', '');
+    
+    if (localVer === remoteVer) {
+      // Đã cập nhật xong -> xóa info update và badge
+      chrome.storage.local.remove("gumballz_update_info");
+      chrome.action.setBadgeText({ text: "" });
+    } else if (data.gumballz_update_info.version !== data.gumballz_dismissed_update) {
+      el.updateVersion.textContent = data.gumballz_update_info.version;
+      let notes = data.gumballz_update_info.notes || "";
+      notes = notes.length > 80 ? notes.substring(0, 80) + '...' : notes;
+      el.updateNotes.textContent = notes;
+      el.updateBanner.style.display = 'flex';
+
+      // Nút ẩn cảnh báo (dismiss)
+      const dismissBtn = $("gz-dismiss-update");
+      if (dismissBtn) {
+        dismissBtn.onclick = () => {
+          chrome.storage.local.set({ gumballz_dismissed_update: data.gumballz_update_info.version });
+          el.updateBanner.style.display = 'none';
+        };
+      }
+    }
   }
 
   const creds    = data.gumballz_credentials || {};
