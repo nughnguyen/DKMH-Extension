@@ -11,6 +11,7 @@
 // ============================================================
 const ALARM_SESSION_HEARTBEAT = "gumballz_heartbeat";
 const ALARM_SCHEDULED_START   = "gumballz_scheduled_start";
+const ALARM_UPDATE_CHECKER    = "gumballz_update_checker";
 const HEARTBEAT_INTERVAL_MIN  = 4; // Chrome alarm min = 1 phut
 
 // ============================================================
@@ -84,6 +85,8 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     await _handleHeartbeat();
   } else if (alarm.name === ALARM_SCHEDULED_START) {
     await _handleScheduledStart();
+  } else if (alarm.name === ALARM_UPDATE_CHECKER) {
+    await _checkForUpdates();
   }
 });
 
@@ -141,6 +144,36 @@ async function _handleScheduledStart() {
       chrome.tabs.sendMessage(tabId, { action: "GUMBALLZ_AUTO_START" });
     }
   });
+}
+
+async function _checkForUpdates() {
+  try {
+    const res = await fetch("https://api.github.com/repos/nughnguyen/DKMH-Extension/releases/latest");
+    if (!res.ok) return;
+    const data = await res.json();
+    
+    // So sanh phien ban: Xoa chu 'v' neu co (vd 'v1.0.1' -> '1.0.1')
+    const remoteVer = data.tag_name.replace('v', '');
+    const localVer = chrome.runtime.getManifest().version;
+
+    // Kiem tra thu cong chuoi phien ban don gian (gia su hinh thuc x.y.z)
+    if (remoteVer !== localVer) {
+      await chrome.storage.local.set({
+        gumballz_update_info: {
+          version: data.tag_name,
+          notes: data.body,
+          url: data.html_url
+        }
+      });
+      chrome.action.setBadgeText({ text: "NEW" });
+      try { chrome.action.setBadgeBackgroundColor({ color: "#ef4444" }); } catch(e){}
+    } else {
+      await chrome.storage.local.remove("gumballz_update_info");
+      chrome.action.setBadgeText({ text: "" });
+    }
+  } catch (err) {
+    console.warn("[GumballZ] Khong the kiem tra ban cap nhat:", err);
+  }
 }
 
 // ============================================================
@@ -224,3 +257,8 @@ chrome.storage.local.get("gumballz_status", ({ gumballz_status }) => {
     startHeartbeatAlarm();
   }
 });
+
+// Setup Update Checker
+chrome.alarms.create(ALARM_UPDATE_CHECKER, { periodInMinutes: 240 }); // check moi 4 tieng
+_checkForUpdates(); // check ngay luc mo
+

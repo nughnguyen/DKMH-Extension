@@ -12,6 +12,9 @@
 const $ = (id) => document.getElementById(id);
 
 const el = {
+  updateBanner:    $("gz-update-banner"),
+  updateVersion:   $("gz-update-version"),
+  updateNotes:     $("gz-update-notes"),
   statusBadge:     $("gz-status-badge"),
   detection:       $("gz-detection"),
   detectionText:   $("gz-detection-text"),
@@ -79,8 +82,20 @@ async function loadFromStorage() {
     "gumballz_settings",
     "gumballz_courses",
     "gumballz_status",
-    "gumballz_scheduled_time"
+    "gumballz_courses",
+    "gumballz_status",
+    "gumballz_scheduled_time",
+    "gumballz_update_info"
   ]);
+
+  // Hien thi cap nhat neu co bai
+  if (data.gumballz_update_info) {
+    el.updateVersion.textContent = data.gumballz_update_info.version;
+    let notes = data.gumballz_update_info.notes || "";
+    notes = notes.length > 80 ? notes.substring(0, 80) + '...' : notes;
+    el.updateNotes.textContent = notes;
+    el.updateBanner.style.display = 'flex';
+  }
 
   const creds    = data.gumballz_credentials || {};
   const settings = data.gumballz_settings    || {};
